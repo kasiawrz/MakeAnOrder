@@ -37,6 +37,20 @@ class Inventory extends React.Component {
     }
 
     render() {
+        // const logout = <button>Log Out!</button>;
+        //
+        // //check if the user is logged in
+        // if(!this.state.uid) {
+        //     return <div>{this.renderLogin()}</div>
+        // }
+        // //check if they are the owner of the current store
+        // if(this.state.uid != this.state.owner) {
+        //     return (
+        //         <div>
+        //             <p>Sorry, you aren't the owner of this store</p>
+        //         </div>
+        //     )
+        // }
         return(
             <div>
                 <h2>Inventory</h2>
@@ -46,6 +60,14 @@ class Inventory extends React.Component {
             </div>
         )
     }
+}
+
+Inventory.propTypes = {
+    addFish: React.PropTypes.func.isRequired,
+    loadSamples: React.PropTypes.func.isRequired,
+    updateFish: React.PropTypes.func.isRequired,
+    removeFish: React.PropTypes.func.isRequired,
+    fishes: React.PropTypes.object.isRequired,
 }
 
 export default Inventory;
