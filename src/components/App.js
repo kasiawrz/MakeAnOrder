@@ -11,6 +11,8 @@ class App extends React.Component {
         super();
 
         this.addFish = this.addFish.bind(this);
+        this.updateFish = this.updateFish.bind(this);
+        this.removeFish = this.removeFish.bind(this);
         this.loadSamples = this.loadSamples.bind(this);
         this.addToOrder = this.addToOrder.bind(this);
         //getInitialState
@@ -63,6 +65,18 @@ class App extends React.Component {
         });
     }
 
+    updateFish(key, updatedFish) {
+        const fishes = {...this.state.fishes};
+        fishes[key] = updatedFish;
+        this.setState({ fishes });
+    }
+
+    removeFish(key) {
+        const fishes = {...this.state.fishes};
+        fishes[key] = null;
+        this.setState({ fishes });
+    }
+
     addToOrder(key) {
         //copy of app's state
         const order = {...this.state.order};
@@ -75,7 +89,7 @@ class App extends React.Component {
 
      render() {
 
-         const fishMeal = Object
+         const fishOrder = Object
              .keys(this.state.fishes)
              .map(key => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder} />);
 
@@ -84,7 +98,7 @@ class App extends React.Component {
                 <div className="menu">
                     <Header tagline="Fresh Market" />
                     <ul className="list-of-fish">
-                        { fishMeal }
+                        { fishOrder }
                     </ul>
 
                 </div>
@@ -93,7 +107,13 @@ class App extends React.Component {
                     order={this.state.order}
                     params={this.props.params}
                 />
-                <Inventory addFish={this.addFish} loadSamples={this.loadSamples}/>
+                <Inventory
+                    addFish={this.addFish}
+                    loadSamples={this.loadSamples}
+                    fishes={this.state.fishes}
+                    updateFish={this.updateFish}
+                    removeFish={this.removeFish}
+                />
             </div>
         )
     }
