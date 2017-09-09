@@ -4,8 +4,6 @@ import { getFunName } from '../helpers';
 class StorePicker extends React.Component {
     goToStore(e) {
         e.preventDefault();
-        console.log('lol');
-        console.log(this.storeInput.value);
 
         const storeId = this.storeInput.value;
         this.context.router.transitionTo(`/store/${storeId}`)

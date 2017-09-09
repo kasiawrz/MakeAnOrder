@@ -27,7 +27,6 @@ class Order extends React.Component {
         const total = orderedMeal.reduce((prevTotal, key) => {
             const fish = this.props.fishes[key];
             const count = this.props.order[key];
-            console.log(fish, count);
             const isAvailable = fish && fish.status === 'available';
             if(isAvailable) {
                 return prevTotal + (count * fish.price || 0)

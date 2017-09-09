@@ -20,17 +20,31 @@ class App extends React.Component {
         };
     }
 
-    //sync store
+    //sync store, runs right before rendering
     componentWillMount() {
         this.ref = base.syncState(`${this.props.params.storeId}/fishes`, {
             context: this,
             state: 'fishes'
         });
+
+        const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`)
+
+        if(localStorageRef) {
+            //update order state ('on load')
+            this.setState({
+                order: JSON.parse(localStorageRef)
+            })
+        }
     }
 
     //stop sync store
     componentWillUnmount() {
         base.removeBinding(this.ref);
+    }
+
+    //called everytime props/state changes
+    componentWillUpdate(nextProps, nextState) {
+        localStorage.setItem(`order-${this.props.params.storeId}`, JSON.stringify(nextState.order));
     }
 
     addFish(fish) {
